@@ -1,9 +1,6 @@
 import streamlit as st
 import requests
 
-# ==========================
-# PAGE CONFIG
-# ==========================
 
 st.set_page_config(
     page_title="Career AI Assistant",
@@ -13,9 +10,6 @@ st.set_page_config(
 
 API_URL = "http://127.0.0.1:8000"
 
-# ==========================
-# SESSION STATE
-# ==========================
 
 if "messages" not in st.session_state:
     st.session_state.messages = []
@@ -26,11 +20,6 @@ if "resume_uploaded" not in st.session_state:
 if "mode" not in st.session_state:
     st.session_state.mode = "Resume AI"
 
-# ==========================
-# CUSTOM CSS
-# (theme base/colors come from .streamlit/config.toml —
-#  this only adds the bespoke bits on top)
-# ==========================
 
 st.markdown("""
 <style>
@@ -253,9 +242,6 @@ div[data-testid="stChatInput"] textarea::placeholder {
 </style>
 """, unsafe_allow_html=True)
 
-# ==========================
-# SIDEBAR
-# ==========================
 
 with st.sidebar:
 
@@ -318,9 +304,6 @@ with st.sidebar:
     else:
         st.warning("No Resume Uploaded")
 
-# ==========================
-# MAIN HEADER
-# ==========================
 
 st.markdown("""
 <div class="header-box">
@@ -331,9 +314,6 @@ st.markdown("""
 
 st.write("")
 
-# ==========================
-# INFO CARDS
-# ==========================
 
 cards = [
     ("Resume AI", "📄", "Ask anything from your resume."),
@@ -359,9 +339,6 @@ for col, (title, icon, desc) in zip(cols, cards):
 
 st.write("")
 
-# ==========================
-# METRICS (custom cards — avoids Streamlit's oversized/truncated metric value)
-# ==========================
 
 metric_data = [
     ("Resume", "Uploaded" if st.session_state.resume_uploaded else "Not Uploaded"),
@@ -386,9 +363,7 @@ for col, (label, value) in zip(m_cols, metric_data):
 
 st.write("")
 
-# ==========================
-# CHAT HISTORY
-# ==========================
+
 
 chat_container = st.container(height=500, border=True)
 
@@ -422,9 +397,6 @@ with chat_container:
                 unsafe_allow_html=True
             )
 
-# ==========================
-# INPUT AREA
-# ==========================
 
 question = st.chat_input("Ask anything...")
 
@@ -441,9 +413,7 @@ if question:
     try:
         with st.spinner("Thinking..."):
 
-            # ==============================
-            # Resume AI
-            # ==============================
+    
             if st.session_state.mode == "Resume AI":
 
                 response = requests.post(
@@ -453,9 +423,7 @@ if question:
 
                 reply = response.json()["answer"]
 
-            # ==============================
-            # Career Advisor
-            # ==============================
+         
             elif st.session_state.mode == "Career Advisor":
 
                 response = requests.post(
@@ -470,9 +438,7 @@ if question:
 
                 reply = response.json()["response"]
 
-            # ==============================
-            # Learning Planner
-            # ==============================
+      
             elif st.session_state.mode == "Learning Planner":
 
                 response = requests.post(
@@ -487,9 +453,6 @@ if question:
 
                 reply = response.json()["response"]
 
-            # ==============================
-            # Multi-turn AI
-            # ==============================
             else:
 
                 response = requests.post(
