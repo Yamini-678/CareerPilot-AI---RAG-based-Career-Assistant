@@ -1,0 +1,33 @@
+# Virtual Environment
+venv/
+.venv/
+
+# Environment variables
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+
+# VS Code
+.vscode/
+
+# Streamlit
+.streamlit/secrets.toml
+
+# Database
+*.db
+*.sqlite3
+
+# Uploaded resumes
+uploads/
+
+# Generated vector database
+vector_db/
+
+# OS files
+.DS_Store
+Thumbs.db
