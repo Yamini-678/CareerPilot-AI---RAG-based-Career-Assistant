@@ -195,7 +195,7 @@ streamlit run streamlit_app.py
 
 # 📸 Screenshots
 
-![Home] (assets/home.png)
+![Home](assets/home.png)
 
 ---
 
